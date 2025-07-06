@@ -47,6 +47,17 @@ services:
     networks:
       - school-network
 
+  school-frontend:
+    container_name: school-frontend
+    image: vvenegasdev/front-school:latest
+    restart: always
+    ports:
+      - "80:80"
+    depends_on:
+      - school-backend
+    networks:
+      - school-network
+
 volumes:
   school_mysql_data:
 
