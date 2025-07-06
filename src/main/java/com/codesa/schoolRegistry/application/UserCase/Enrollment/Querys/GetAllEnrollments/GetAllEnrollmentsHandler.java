@@ -1,6 +1,5 @@
 package com.codesa.schoolRegistry.application.UserCase.Enrollment.Querys.GetAllEnrollments;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
