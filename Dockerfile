@@ -1,13 +1,14 @@
-# Etapa 1: build con Maven usando Java 17
-FROM eclipse-temurin:21 AS build
+FROM maven:3.9.6-eclipse-temurin-21 AS build
 WORKDIR /app
-COPY . .
-RUN chmod +x ./mvnw
-RUN ./mvnw clean package -DskipTests
-RUN jar tf target/*.jar | grep mysql
+COPY pom.xml .
+RUN mvn dependency:go-offline
 
-# Etapa 2: run con JDK
-FROM eclipse-temurin:21-jdk
+COPY src ./src
+RUN mvn clean package -DskipTests
+
+
+# Stage 2: Create the final image
+FROM eclipse-temurin:21-jre
 WORKDIR /app
 COPY --from=build /app/target/*.jar app.jar
 ENTRYPOINT ["java", "-jar", "app.jar"]

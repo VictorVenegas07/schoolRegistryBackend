@@ -1,5 +1,6 @@
 package com.codesa.schoolRegistry.application.UserCase.Staff.Commands.Create;
 
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.codesa.schoolRegistry.application.Interfaces.RequestHandler;
@@ -18,11 +19,13 @@ public class CreateStaffHandler implements RequestHandler<CreateStaffCommand, St
     private final StaffRepository staffRepository;
     private final PersonRepository personRepository;
     private final UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;
 
-    public CreateStaffHandler(StaffRepository staffRepository, PersonRepository personRepository, UserRepository userRepository) {
+    public CreateStaffHandler(StaffRepository staffRepository, PersonRepository personRepository, UserRepository userRepository, PasswordEncoder passwordEncoder) {
         this.staffRepository = staffRepository;
         this.personRepository = personRepository;
         this.userRepository = userRepository;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @Transactional
@@ -46,7 +49,7 @@ public class CreateStaffHandler implements RequestHandler<CreateStaffCommand, St
         
         User user = User.builder()
             .username(command.getUserName())
-            .password(command.getPassword())
+            .password(passwordEncoder.encode(command.getPassword()))
             .role("STAFF")
             .person(response)
             .build();
