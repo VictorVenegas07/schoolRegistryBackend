@@ -35,8 +35,13 @@ Sistema de registro escolar desarrollado con **Angular** (frontend) y **Spring B
 📦 Backend Spring Boot: http://localhost:8080/swagger-ui/index.html#/
 
 🐘 pgAdmin o Adminer (si está configurado): http://localhost:8081
-
 ---
 ## Acceso a la aplicacion 
 - 👤 **UserDefault**: admin
 - 🔑 **PasswordUser**: admin123
+---
+## Diagrama relacional base de datos 
+
+![image](https://github.com/user-attachments/assets/7fd97115-57e9-462b-aecf-302e6168396f)
+
+
